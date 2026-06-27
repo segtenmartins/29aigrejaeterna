@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Igreja Eterna</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Cinzel:wght@500;700&family=EB+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --cor-destaque: #ffffff;
+            --cor-texto: #ffffff;
+            --cor-secundario: #bbbbbb;
+            --fundo: #0d0a04;
+            --fundo-card: rgba(255,255,255,0.05);
+            --borda: rgba(255,255,255,0.18);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--fundo);
+            color: var(--cor-texto);
+            font-family: 'EB Garamond', serif;
+            font-size: clamp(1.15rem, 2.5vw, 1.35rem);
+            line-height: 1.6;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        h1, h2, h3 {
+            color: var(--cor-destaque);
+            font-weight: 700;
+            text-align: center;
+        }
+
+        h1 {
+            font-family: 'Cinzel Decorative', serif;
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            margin-bottom: 10px;
+            letter-spacing: 2px;
+        }
+
+        h2 {
+            font-family: 'Cinzel', serif;
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
+            margin-bottom: 30px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        h3 {
+            font-family: 'Cinzel', serif;
+            font-size: clamp(1.3rem, 3vw, 1.6rem);
+            margin-bottom: 15px;
+            text-align: left;
+            border-bottom: 1px solid var(--borda);
+            padding-bottom: 5px;
+        }
+
+        /* Barra de Navegação */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(13, 10, 4, 0.95);
+            border-bottom: 1px solid var(--borda);
+            z-index: 1000;
+            padding: 15px 0;
+            backdrop-filter: blur(5px);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            flex-wrap: wrap;
+            padding: 0 20px;
+        }
+
+        nav button {
+            background: none;
+            border: none;
+            color: var(--cor-secundario);
+            font-family: 'Cinzel', serif;
+            font-size: 0.95rem;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            transition: color 0.3s, text-shadow 0.3s;
+        }
+
+        nav button:hover {
+            color: var(--cor-destaque);
+            text-shadow: 0 0 8px rgba(255,255,255,0.6);
+        }
+
+        /* Hero / Header */
+        header {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 100px 20px;
+            text-align: center;
+            background: radial-gradient(circle, rgba(40,30,10,0.15) 0%, rgba(13,10,4,1) 80%);
+            position: relative;
+        }
+
+        .subtitle {
+            font-family: 'Cinzel', serif;
+            color: var(--cor-secundario);
+            font-size: clamp(1rem, 2.5vw, 1.4rem);
+            max-width: 700px;
+            margin: 0 auto 40px auto;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .scrolldown {
+            margin-top: 50px;
+            font-family: 'Cinzel', serif;
+            font-size: 0.9rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--borda);
+            animation: pulse 2s infinite;
+            cursor: pointer;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 0.3; transform: translateY(0); }
+            50% { opacity: 1; transform: translateY(5px); }
+            100% { opacity: 0.3; transform: translateY(0); }
+        }
+
+        /* Divisores */
+        .divisor {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 60px auto;
+            max-width: 400px;
+            opacity: 0.5;
+        }
+
+        .divisor::before, .divisor::after {
+            content: "";
+            flex: 1;
+            height: 1px;
+            background: linear-gradient(to right, transparent, var(--borda), transparent);
+        }
+
+        .divisor-glyph {
+            font-family: 'Cinzel', serif;
+            padding: 0 15px;
+            font-size: 1.2rem;
+            color: var(--cor-secundario);
+        }
+
+        /* Seções Básicas */
+        section {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 80px 20px;
+        }
+
+        p {
+            margin-bottom: 25px;
+            text-align: justify;
+            color: rgba(255,255,255,0.9);
+        }
+
+        .citacao {
+            font-style: italic;
+            border-left: 2px solid var(--borda);
+            padding-left: 20px;
+            margin: 30px 0;
+            color: var(--cor-secundario);
+        }
+
+        /* Grid de Dimensões */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .card {
+            background-color: var(--fundo-card);
+            border: 1px solid var(--borda);
+            padding: 30px;
+            border-radius: 4px;
+            transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(255,255,255,0.4);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+        }
+
+        .card-meta {
+            font-family: 'Cinzel', serif;
+            font-size: 0.85rem;
+            color: var(--cor-secundario);
+            margin-bottom: 15px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        /* Bloco de Síntese Concéntrica */
+        .sintese-bloco {
+            margin-top: 50px;
+            padding: 25px;
+            border: 1px double var(--borda);
+            background: linear-gradient(to right, rgba(255,255,255,0.01), rgba(255,255,255,0.03), rgba(255,255,255,0.01));
+            text-align: center;
+            border-radius: 4px;
+        }
+
+        .sintese-bloco p {
+            text-align: center;
+            font-family: 'Cinzel', serif;
+            font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+            letter-spacing: 1px;
+            margin-bottom: 0;
+            color: var(--cor-destaque);
+        }
+
+        /* ESTILIZAÇÃO DO DIAGRAMA CONCÊNTRICO EM CSS */
+        .diagrama-container {
+            margin: 50px auto 20px auto;
+            max-width: 480px;
+            padding: 20px;
+            text-align: center;
+            font-family: 'Cinzel', serif;
+        }
+
+        .diagrama-titulo {
+            font-size: 0.95rem;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--cor-secundario);
+            margin-bottom: 30px;
+        }
+
+        .circulo-eterno {
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            border: 2px solid rgba(255, 255, 255, 0.8);
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            padding-top: 25px;
+            position: relative;
+            box-shadow: inset 0 0 20px rgba(255,255,255,0.03), 0 0 15px rgba(255,255,255,0.05);
+        }
+
+        .circulo-invisivel {
+            width: 76%;
+            height: 76%;
+            border: 1.5px solid rgba(255, 255, 255, 0.5);
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            padding-top: 25px;
+            position: absolute;
+            bottom: 6%;
+        }
+
+        .circulo-visivel {
+            width: 58%;
+            height: 58%;
+            border: 1.5px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: absolute;
+            bottom: 10%;
+            background-color: rgba(255,255,255,0.02);
+        }
+
+        .label-eterno { font-size: 1.1rem; letter-spacing: 2px; color: #ffffff; font-weight: 700; text-shadow: 0 0 8px rgba(255,255,255,0.3); }
+        .label-invisivel { font-size: 0.95rem; letter-spacing: 1.5px; color: #dddddd; font-weight: 500; }
+        .label-visivel { font-size: 0.85rem; letter-spacing: 1px; color: #aaaaaa; text-align: center; line-height: 1.3; }
+        .label-visivel strong { display: block; font-size: 0.95rem; color: #ffffff; letter-spacing: 1.5px; margin-bottom: 2px; }
+
+        /* Linha do Tempo Escatológica */
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 50px auto 0 auto;
+            padding-left: 30px;
+        }
+
+        .timeline::before {
+            content: "";
+            position: absolute;
+            left: 5px;
+            top: 0;
+            bottom: 0;
+            width: 1px;
+            background-color: var(--borda);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 40px;
+            animation-fill-mode: both;
+        }
+
+        .timeline-marker {
+            position: absolute;
+            left: -30px;
+            top: 8px;
+            width: 11px;
+            height: 11px;
+            border-radius: 50%;
+            background-color: var(--cor-destaque);
+            box-shadow: 0 0 8px var(--cor-destaque);
+        }
+
+        .timeline-title {
+            font-family: 'Cinzel', serif;
+            font-size: 1.15rem;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Lista de Implicações */
+        .implicacoes-lista {
+            list-style: none;
+            margin-top: 30px;
+        }
+
+        .implicacoes-lista li {
+            position: relative;
+            padding-left: 25px;
+            margin-bottom: 20px;
+        }
+
+        .implicacoes-lista li::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 12px;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background-color: var(--cor-destaque);
+            box-shadow: 0 0 6px var(--cor-destaque);
+        }
+
+        .implicacoes-lista strong {
+            font-family: 'Cinzel', serif;
+            display: block;
+            font-size: 1.05rem;
+            letter-spacing: 0.5px;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+        }
+
+        /* Rodapé */
+        footer {
+            border-top: 1px solid var(--borda);
+            padding: 50px 20px;
+            text-align: center;
+            font-family: 'Cinzel', serif;
+            font-size: 0.9rem;
+            color: var(--cor-secundario);
+            background-color: rgba(0,0,0,0.2);
+        }
+
+        footer .simbolo {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: var(--cor-destaque);
+        }
+
+        footer .nota {
+            font-family: 'EB Garamond', serif;
+            font-style: italic;
+            margin-top: 10px;
+            font-size: 0.95rem;
+            opacity: 0.7;
+        }
+
+        /* Botão Voltar ao Topo */
+        #backTop {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background-color: var(--fundo);
+            border: 1px solid var(--borda);
+            color: var(--cor-destaque);
+            font-family: 'Cinzel', serif;
+            font-size: 1.2rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.4s, visibility 0.4s, border-color 0.3s;
+            z-index: 999;
+        }
+
+        #backTop.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        #backTop:hover {
+            border-color: var(--cor-destaque);
+            box-shadow: 0 0 10px rgba(255,255,255,0.3);
+        }
+
+        @media (max-width: 600px) {
+            nav { padding: 10px 0; }
+            .nav-container { gap: 10px; }
+            nav button { font-size: 0.8rem; letter-spacing: 1px; }
+            section { padding: 50px 15px; }
+            .card-grid { grid-template-columns: 1fr; }
+            .circulo-eterno { padding-top: 15px; }
+            .circulo-invisivel { padding-top: 15px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Barra de Navegação -->
+    <nav id="mainNav">
+        <div class="nav-container">
+            <button onclick="irPara('introducao')">A Tese</button>
+            <button onclick="getSection('dimensoes')">As 3 Dimensões</button>
+            <button onclick="irPara('tipologia')">Tipologia</button>
+            <button onclick="irPara('escatologia')">Fluxo Escatológico</button>
+            <button onclick="irPara('conclusao')">Consumação</button>
+        </div>
+    </nav>
+
+    <!-- Header Hero -->
+    <header id="topo">
+        <h1>A Igreja Eterna</h1>
+        <div class="subtitle">O Eixo Redentor da História Bíblica de Eternidade a Eternidade</div>
+        <div class="scrolldown" onclick="irPara('introducao')">Adentrar a Síntese ▼</div>
+    </header>
+
+    <!-- Seção 1: Introdução/Tese -->
+    <section id="introducao">
+        <h2>A Proposta Teológica</h2>
+        <p>A presente síntese estabelece uma articulação eclesiológica e escatológica de alta precisão. O eixo central que conduz toda a narrativa sagrada — desde o decreto oculto na eternidade passada até a glorificação cósmica na eternidade futura — é a comunhão viva manifestada entre o Messias e Seu Corpo místico.</p>
+        <p>Esta perspectiva fundamenta-se na observação da manifestação visível e progressiva dos eleitos em Cristo através do tempo histórico, harmonizando o rigor cronológico do Pré-milenismo e Pré-tribulacionismo clássicos com a soberana unidade indissolúvel do povo de Deus de todas as eras.</p>
+        <div class="citacao">
+            "Como também nos elegeu nele antes da fundação do mundo, para que fôssemos santos e irrepreensíveis diante dele em amor." — Efésios 1:4
+        </div>
+    </section>
+
+    <div class="divisor"><span class="divisor-glyph">Ω</span></div>
+
+    <!-- Seção 2: As 3 Dimensões -->
+    <section id="dimensoes">
+        <h2>As Três Dimensões da Igreja</h2>
+        <p>Para se compreender a integridade deste povo, a Igreja deve ser analisada sob três dimensões eclesiológicas complementares e simultâneas:</p>
+        
+        <div class="card-grid">
+            <div class="card">
+                <div class="card-meta">Dimensão Decretal</div>
+                <h3>1. A Igreja Eterna</h3>
+                <p>O plano soberano desenhado na mente de Deus antes do tempo existir. Representa o decreto eletivo absoluto em que todos os remidos foram vistos e amados pelo Pai no Pacto da Redenção, guardados no Livro da Vida.</p>
+            </div>
+            <div class="card">
+                <div class="card-meta">Dimensão Mística e Universal</div>
+                <h3>2. A Igreja Invisível</h3>
+                <p>O organismo vivo composto por todos os verdadeiros convertidos de todas as épocas e nações que só Deus conhece. Engloba os santos do Antigo Testamento, a Igreja Visível até agora, no instante que estamos lendo este estudo. Os salvos da grande tribulação e os salvos do milênio vão sendo acrescentados a esta igreja até o último arrependido antes do Julgamento do Grande Trono Branco. Esta distinção é importante para entendermos os acontecimentos escatológicos.</p>
+            </div>
+            <div class="card">
+                <div class="card-meta">Dimensão Histórica e Revealed</div>
+                <h3>3. A Igreja Visível</h3>
+                <p>A instituição que atua na Terra em uma janela cronológica restrita: inicia-se na descida do Espírito Santo em Atos 2 e se encerra no Arrebatamento Pré-Tribulacionista. É o mistério que foi revelado à história. É composta por joio e trigo, porém no arrebatamento o trigo sobe e o joio fica.</p>
+            </div>
+        </div>
+
+        <!-- Bloco de Conclusão Concêntrica -->
+        <div class="sintese-bloco">
+            <p>Em suma: A Igreja Eterna contém a Igreja Invisível, que por sua vez contém a verdadeira Igreja Visível.</p>
+        </div>
+
+        <!-- DIAGRAMA CONCÊNTRICO MELHORADO (SUBSTITUTO DA IMAGEM ESTÁTICA) -->
+        <div class="diagrama-container">
+            <div class="diagrama-titulo">Igreja = Corpo Místico de Cristo</div>
+            <div class="circulo-eterno">
+                <span class="label-eterno">Eterna</span>
+                <div class="circulo-invisivel">
+                    <span class="label-invisivel">Invisível</span>
+                    <div class="circulo-visivel">
+                        <span class="label-visivel"><strong>Visível</strong>(Trigo)</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="divisor"><span class="divisor-glyph">Ω</span></div>
+
+    <!-- Seção 3: Tipologia e Aliança -->
+    <section id="tipologia">
+        <h2>A Tipologia da Aliança e as Bodas</h2>
+        <p>A celebração das Bodas do Cordeiro no ambiente celestial, ocorrendo durante o período da Grande Tribulação na Terra, revela uma distinção de papéis perfeitamente tipificada nas Escrituras:</p>
+        
+        <ul class="implicacoes-lista">
+            <li>
+                <strong>A Noiva Exclusiva</strong>
+                A Igreja Visível (de Atos 2 ao Arrebatamento) assume a posição jurídica e gloriosa de Noiva, fruto direto da manifestação terrena do Messias Visível (João 1:1) e do mistério outrora oculto.
+            </li>
+            <li>
+                <strong>Os Amigos do Noivo</strong>
+                Os santos do Antigo Testamento, ressuscitados conjuntamente no Arrebatamento, participam da celebração celestial como convidados de honra, perfeitamente personificados nas palavras confessionais de João Batista em João 3:29.
+            </li>
+            <li>
+                <strong>A Representação Federal em Gênesis 15</strong>
+                Essa distinção fundamenta-se no tipo bíblico da Aliança Abrâmica. Quando Deus cortou o pacto de sangue com Abraão, nem seus antepassados nem seus descendentes históricos estavam no cenário visível, contudo, todos estavam juridicamente representados na figura de Abraão. Da mesma forma, as Bodas são a confirmação da aliança eterna, onde a Noiva atua como a representante visível de todo o Corpo místico.
+            </li>
+        </ul>
+    </section>
+
+    <div class="divisor"><span class="divisor-glyph">Ω</span></div>
+
+    <!-- Seção 4: Fluxo Escatológico -->
+    <section id="escatologia">
+        <h2>O Fluxo Progressivo na História</h2>
+        <p>Na linha do tempo humana, a constituição da Igreja Invisível opera de modo progressivo e dinâmico, acumulando os salvos de cada era até a consumação dos séculos:</p>
+        
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="timeline-marker"></div>
+                <div class="timeline-title">1. A Era da Graça (Atos 2 ao Arrebatamento)</div>
+                <p>Formação e atuação da Igreja Visível na Terra. No Arrebatamento, os mortos em Cristo e os santos do Antigo Testamento ressuscitam, subindo com os crentes transformados para as Bodas no Céu.</p>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-marker"></div>
+                <div class="timeline-title">2. O Período da Grande Tribulação (7 Anos)</div>
+                <p>Enquanto a festa ocorre nas regiões celestes, novas pessoas se convertem na Terra sob o martírio. Ao morrerem fisicamente, suas almas sobem ao céu e se anexam progressivamente aos Amigos do Noivo na dimensão da Igreja Invisível.</p>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-marker"></div>
+                <div class="timeline-title">3. A Manifestação e o Milênio Literal</div>
+                <p>Cristo retorna visivelmente com Sua Noiva e os Santos para julgar as nações. Os sobreviventes entram no Milênio in natura (em corpos naturais). À medida que as novas gerações nascem com a natureza decaída e experimentam o novo nascimento, elas vão sendo continuamente acrescidas à Igreja Invisível.</p>
+            </div>
+        </div>
+    </section>
+
+    <div class="divisor"><span class="divisor-glyph">Ω</span></div>
+
+    <!-- Seção 5: Conclusão / Consumação -->
+    <section id="conclusao">
+        <h2>A Fusão Perfeita e o Estado Eterno</h2>
+        <p>O mistério do tempo e do decreto encontra sua resolução absoluta no Juízo do Grande Trono Branco. Quando a última conversão da história humana se concretiza, o fluxo de acréscimo cessa.</p>
+        <p>Nesse momento exato, a <strong>Igreja Invisível</strong> atinge sua estatura perfeita e plenitude numérica, tornando-se absolutamente <strong>idêntica e sobreposta à Igreja Eterna</strong>. Cada nome soberanamente escrito no Livro da Vida — registrado no decreto eterno e manifesto desde os primórdios em Gênesis — estará presente.</p>
+        <p>Não há hiato temporal ou necessidade de um período de recuperação física após o Trono Branco. Em um ato cataclísmico e instantâneo, o cosmos antigo se dissolve pelo fogo e surge um Novo Céu e uma Nova Terra. A Nova Jerusalém desce, fundindo a realidade terrena e a celestial, onde todo o Corpo de Cristo, glorificado e unificado, viverá em perfeita comunhão de eternidade a eternidade.</p>
+    </section>
+
+    <!-- Rodapé -->
+    <footer>
+        <div class="simbolo">✝</div>
+        <div>A IGREJA ETERNA</div>
+        <div class="nota">Síntese de Eclesiologia Cósmica e Escatologia Concreta</div>
+    </footer>
+
+    <!-- Botão Voltar ao Topo -->
+    <button id="backTop" onclick="window.scrollTo({top: 0, behavior: 'smooth'});">▲</button>
+
+    <script>
+        function irPara(id) {
+            const el = document.getElementById(id);
+            if (!el) return;
+            const navH = document.getElementById('mainNav').offsetHeight;
+            const top = el.getBoundingClientRect().top + window.scrollY - navH - 16;
+            window.scrollTo({ top, behavior: 'smooth' });
+        }
+        function getSection(id) { irPara(id); }
+
+        // Controle do Botão Voltar ao Topo
+        window.addEventListener('scroll', function() {
+            const btn = document.getElementById('backTop');
+            if (window.scrollY > 400) {
+                btn.classList.add('visible');
+            } else {
+                btn.classList.remove('visible');
+            }
+        });
+    </script>
+</body>
+</html>
